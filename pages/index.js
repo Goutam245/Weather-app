@@ -19,23 +19,29 @@ export const App = () => {
   const [unitSystem, setUnitSystem] = useState("metric");
 
   useEffect(() => {
+    // ইনপুট খালি হলে API কল করো না
+    if (!cityInput || cityInput.trim() === "") return;
+
     const getData = async () => {
-      const res = await fetch("api/data", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cityInput }),
-      });
-      const data = await res.json();
-      setWeatherData({ ...data });
-      setCityInput("");
+      try {
+        const res = await fetch("api/data", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ cityInput }),
+        });
+        const data = await res.json();
+        setWeatherData({ ...data });
+
+        // setCityInput("");  // এটা বন্ধ করে দিয়েছি
+      } catch (error) {
+        console.error("Fetch error:", error);
+      }
     };
     getData();
   }, [triggerFetch]);
 
   const changeSystem = () =>
-    unitSystem == "metric"
-      ? setUnitSystem("imperial")
-      : setUnitSystem("metric");
+    unitSystem === "metric" ? setUnitSystem("imperial") : setUnitSystem("metric");
 
   return weatherData && !weatherData.message ? (
     <div className={styles.wrapper}>
@@ -59,7 +65,9 @@ export const App = () => {
             }}
             onChange={(e) => setCityInput(e.target.value)}
             onKeyDown={(e) => {
-              e.keyCode === 13 && setTriggerFetch(!triggerFetch);
+              if (e.keyCode === 13) {
+                setTriggerFetch(!triggerFetch);
+              }
               e.target.placeholder = "Search a city...";
             }}
           />
