@@ -17,6 +17,7 @@
 
 # misc
 .DS_Store
+temp_auto_push.bat
 *.pem
 
 # debug
@@ -36,3 +37,5 @@ yarn-error.log*
 .vercel
 
 .env
+temp_interactive_push.bat
+.gitignore
