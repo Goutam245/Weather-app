@@ -5,7 +5,8 @@ Check the current weather on any city on the planet. Switch between metric and i
 ![Alt img](https://images.ctfassets.net/zlsyc9paq6sa/3uBrJ07WSM40FpolgjInHY/7d886cb4187b52194bf9b63c183a1d3a/1627637330_x.gif)
 
 Production-ready weather application delivering real-time meteorological data across 200,000+ cities worldwide. Optimized for instant weather insights with seamless user experience.
-Live Demo: weather-app-fxjo.vercel.app
+
+
 Key Features:
 
 Real-time API integration with OpenWeather
